@@ -5,6 +5,7 @@ TODO:
 3. Support API versioning
 4. Emit meaningful logs
 5. /health checkpoint
+   -> Important: Learn to do well
 6. Unit tests - Done partially
 
 Notes:
