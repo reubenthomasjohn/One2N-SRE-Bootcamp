@@ -6,7 +6,7 @@ async function main() {
     // ...write Prisma Client queries here 
     const students = await prisma.student.findMany({});
     console.log(students);
-};
+}
 
 main()
     .then(async () => {
