@@ -2,7 +2,7 @@ name: run api
 run-name: ${{ github.actor }} is running api 🚀
 on: [push]
 jobs:
-  checkout and setup:
+  checkout-setup:
     runs-on: self-hosted
     defaults:
       run:
