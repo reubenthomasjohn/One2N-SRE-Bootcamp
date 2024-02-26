@@ -16,6 +16,6 @@ jobs:
           npm i
           make lint
           make build
-          make run-prod-up
+          make prod-up
           echo "🍏 This job's status is ${{ job.status }}."
         working-directory: ./api
