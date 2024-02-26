@@ -1,6 +1,8 @@
 name: run api
 run-name: ${{ github.actor }} is running api 🚀
-on: [push]
+on:
+  push:
+  workflow_dispatch:
 jobs:
   checkout-setup:
     runs-on: self-hosted
@@ -13,4 +15,8 @@ jobs:
         with:
           node-version: "18"
       - run: npm i
+      - run: npm make lint
+      - run: npm make build
+      - run: npm make test
+      - run: npm make run-prod-up
       - run: echo "🍏 This job's status is ${{ job.status }}."
