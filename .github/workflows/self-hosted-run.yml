@@ -16,8 +16,8 @@ jobs:
         with:
           node-version: "18"
       - run: npm i
-      - run: npm make lint
-      - run: npm make build
-      - run: npm make test
-      - run: npm make run-prod-up
+      - run: make lint
+      - run: make build
+      - run: make test
+      - run: make run-prod-up
       - run: echo "🍏 This job's status is ${{ job.status }}."
