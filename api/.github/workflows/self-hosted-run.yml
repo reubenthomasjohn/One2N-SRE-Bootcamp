@@ -1,0 +1,14 @@
+name: run api on self-hosted GitHub Actions runner
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cd api/
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+      - run: npm i
+      - run: echo "🍏 This job's status is ${{ job.status }}."
