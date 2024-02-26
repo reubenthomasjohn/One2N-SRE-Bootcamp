@@ -6,17 +6,16 @@ on:
 jobs:
   checkout-setup:
     runs-on: self-hosted
-    defaults:
-      run:
-        working-directory: ./api
     steps:
       - run: brew install make
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: "18"
-      - run: npm i
-      - run: make lint
-      - run: make build
-      - run: make run-prod-up
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: |
+          npm i
+          make lint
+          make build
+          make run-prod-up
+          echo "🍏 This job's status is ${{ job.status }}."
+        working-directory: ./api
