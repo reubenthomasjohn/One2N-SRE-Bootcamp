@@ -15,10 +15,13 @@ test:
 lint:
 	npx eslint $(SRC_DIR)/**/*.ts
 
-run-prod-up:
+test-down:
+	docker-compose -f docker-compose.test.yml down
+
+prod-up:
 	docker-compose -f docker-compose.app.yml up
 
-run-prod-down:
+prod-down:
 	docker-compose -f docker-compose.app.yml down
 
-.PHONY: build test lint run-prod-up run-prod-down
+.PHONY: build test lint test-down prod-up prod-down

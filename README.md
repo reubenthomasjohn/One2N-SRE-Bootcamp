@@ -22,3 +22,8 @@ tar xzf ./actions-runner-osx-arm64-2.313.0.tar.gz
 ```
 
 2. Prisma Integration testing docs: https://www.prisma.io/blog/testing-series-3-aBUyF8nxAn
+
+3. Install Github CLI
+   `brew install gh`
+
+4. Run `gh auth login`
