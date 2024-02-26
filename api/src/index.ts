@@ -27,14 +27,14 @@ app.get("/students/:id", async (req: Request, res: Response) => {
 });
 
 app.post("/student", async (req: Request, res: Response) => {
-  await prisma.student.create({
+  const newStudent = await prisma.student.create({
     data: {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
     }
 })
-  res.json({
-    msg: "created student"
+  res.status(200).json({
+    newStudent
   });
 });
 
@@ -65,3 +65,5 @@ app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
   console.log(`[server]: The connection URL is ${process.env.DATABASE_URL}`)
 });
+
+export default app

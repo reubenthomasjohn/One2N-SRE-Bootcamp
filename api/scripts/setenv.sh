@@ -2,4 +2,4 @@
 # scripts/setenv.sh
 
 # Export env vars
-export $(grep -v '^#' .env | xargs)
+export $(grep -v '^#' ./../.env.test | xargs)
