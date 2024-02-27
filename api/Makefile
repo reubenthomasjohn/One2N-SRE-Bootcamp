@@ -19,7 +19,7 @@ test-down:
 	docker-compose -f docker-compose.test.yml down
 
 prod-up:
-	docker-compose -f docker-compose.app.yml up
+	docker-compose -f docker-compose.app.yml up -d
 
 prod-down:
 	docker-compose -f docker-compose.app.yml down
