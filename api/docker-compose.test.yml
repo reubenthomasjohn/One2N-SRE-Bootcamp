@@ -1,22 +1,20 @@
 # docker-compose.test.yml
-version: '3.8'
+version: '3.9'
 services:
   db:
     container_name: test-db
     image: postgres:14.1-alpine
     restart: always
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_HOST: ${POSTGRES_HOST} 
-      POSTGRES_PORT: ${POSTGRES_PORT}
-      POSTGRES_DB: ${TEST_POSTGRES_DB} 
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
-      - '${POSTGRES_PORT}:${POSTGRES_PORT}'
-    expose:
-      - ${POSTGRES_PORT}
-    volumes:
-      - db:/var/lib/postgresql/data
+      - '5432:5432'
+    # healthcheck:
+    #   test: ["CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${TEST_POSTGRES_DB} -h ${TEST_POSTGRES_HOST}'"]
+    #   interval: 10s
+    #   timeout: 3s
+    #   retries: 3
 volumes:
   db:
     driver: local

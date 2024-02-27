@@ -1,30 +1,24 @@
 #!/usr/bin/env bash
 # scripts/run-integration.sh
 
-container_name=test-db
-
 DIR="$(cd "$(dirname "$0")" && pwd)"
-echo $DIR
+
 source $DIR/setenv.sh
 
-# Check if the test-db container is already running
-if [ "$(docker container inspect -f '{{.State.Status}}' $container_name)" = "running" ]; then
-    echo '🟢 - Database container (test-db) is already running.'
-    docker-compose -f docker-compose.test.yml down
-    docker-compose -f docker-compose.test.yml up -d
-else
-    # If not running, bring up the containers
-    docker-compose -f docker-compose.test.yml up -d
+source ./.env
 
-    echo '🟡 - Waiting for database to be ready...'
-    echo "Waiting for ${TEST_DATABASE_URL}"
-    $DIR/wait-for-it.sh "${TEST_DATABASE_URL}" -- echo '🟢 - Database is ready!'
-fi
+# Create DATABASE_URL and TEST_DATABASE_URL
+export DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+export TEST_DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${TEST_POSTGRES_DB}
 
-# Apply migrations using Prisma
+docker-compose -f docker-compose.test.yml up -d
+
+echo '🟡 - Waiting for database to be ready...'
+$DIR/wait-for-it.sh "${TEST_DATABASE_URL}" -- echo '🟢 - Database is ready!'
+
+tsc -b
 npx prisma migrate dev --name init
 
-# Run vitest
 if [ "$#" -eq "0" ]; then
     vitest -c ./vitest.config.integration.ts
 else
