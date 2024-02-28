@@ -51,11 +51,8 @@ jobs:
       #   with:
       #     images: reubenthomasjohn/one2n-sre-bootcamp-api-image
 
-      # - name: cd into api/
-      #   run: cd api/
-
       - name: Build the docker image
-        run: docker build ./api --file Dockerfile --tag reubenthomasjohn/one2n-sre-bootcamp-api-image:v1
+        run: cd api && docker build -t reubenthomasjohn/one2n-sre-bootcamp-api-image:v1 .
 
       - name: Docker push
         run: docker push reubenthomasjohn/one2n-sre-bootcamp-api-image:v1
