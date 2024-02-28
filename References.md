@@ -18,3 +18,11 @@ tar xzf ./actions-runner-osx-arm64-2.313.0.tar.gz
    `brew install gh`
 
 4. Run `gh auth login`
+
+5. Understand what the following does:
+
+```sh
+$ mv .git/refs/remotes/origin/HEAD /tmp
+$ git gc
+$ git prune
+```
