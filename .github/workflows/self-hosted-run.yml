@@ -6,6 +6,7 @@ on:
 jobs:
   run-api:
     runs-on: self-hosted
+    needs: publish-docker-image
     env:
       POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
