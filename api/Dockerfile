@@ -2,8 +2,8 @@ FROM node:18
 
 WORKDIR /app
 
-# Copy everything
-COPY . .
+# Copy only package.json and package-lock.json to leverage Docker cache
+COPY package*.json ./
 
 # Install dependencies using npm
 RUN npm install
