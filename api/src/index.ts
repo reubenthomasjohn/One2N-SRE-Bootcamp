@@ -26,7 +26,7 @@ app.get("/students/:id", async (req: Request, res: Response) => {
   res.json(student);
 });
 
-app.post("/student", async (req: Request, res: Response) => {
+app.post("/students", async (req: Request, res: Response) => {
   const newStudent = await prisma.student.create({
     data: {
         firstName: req.body.firstName,
@@ -38,27 +38,32 @@ app.post("/student", async (req: Request, res: Response) => {
   });
 });
 
-app.put("/student/:id", async (req: Request, res: Response) => {
+app.put("/students/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   const { firstName, lastName} = req.body;
-  const post = await prisma.student.update({
-    where: { id: Number(id) },
-    data: {
-      firstName: firstName,
-      lastName: lastName
-    }
-  });
-  res.json(post);
+  try {
+    const updatedStudent = await prisma.student.update({
+      where: { id: Number(id) },
+      data: {
+        firstName: firstName,
+        lastName: lastName
+      }
+    });
+    res.json(updatedStudent);
+  } catch (error) {
+    console.error("Error updating student:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
-app.delete("/user/:id", async (req: Request, res: Response) => {
+app.delete("/students/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
-  const user = await prisma.student.delete({
+  const deletedStudent = await prisma.student.delete({
     where: {
       id: parseInt(id),
     },
   });
-  res.json(user);
+  res.json(deletedStudent);
 });
 
 app.listen(port, () => {
