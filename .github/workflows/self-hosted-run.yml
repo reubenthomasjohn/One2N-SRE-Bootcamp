@@ -51,8 +51,8 @@ jobs:
         with:
           images: reubenthomasjohn/one2n-sre-bootcamp-api-image
 
-      - name: cat github workspace
-        run: cat ${{ github.workspace }}
+      - name: ls github workspace
+        run: ls ${{ github.workspace }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
